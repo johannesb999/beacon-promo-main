@@ -41,11 +41,14 @@ function tick() {
   raf = requestAnimationFrame(tick)
 }
 
-function onMove(e: MouseEvent) {
+function onMove(e: MouseEvent | TouchEvent) {
   const radar = radarEl.value
   if (!radar) return
+  // works for both mouse and touch (finger) — pick the active pointer
+  const p = 'touches' in e ? e.touches[0] : e
+  if (!p) return
   const r = radar.getBoundingClientRect()
-  targetAngle = Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2))
+  targetAngle = Math.atan2(p.clientY - (r.top + r.height / 2), p.clientX - (r.left + r.width / 2))
   if (!animating) {
     animating = true
     raf = requestAnimationFrame(tick)
@@ -55,10 +58,14 @@ function onMove(e: MouseEvent) {
 onMounted(() => {
   placeDot()
   window.addEventListener('mousemove', onMove, { passive: true })
+  window.addEventListener('touchstart', onMove, { passive: true })
+  window.addEventListener('touchmove', onMove, { passive: true })
   window.addEventListener('resize', placeDot)
 })
 onBeforeUnmount(() => {
   window.removeEventListener('mousemove', onMove)
+  window.removeEventListener('touchstart', onMove)
+  window.removeEventListener('touchmove', onMove)
   window.removeEventListener('resize', placeDot)
   cancelAnimationFrame(raf)
 })
@@ -215,8 +222,11 @@ onBeforeUnmount(() => {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 44px; /* dot is 32px -> ~6px background halo ring, like HowToSection */
-  height: 44px;
+  /* sized relative to the radar (like the core/waves) so it scales down on
+     mobile — ~7.9% keeps the desktop look (≈44px at a 560px radar) while
+     staying a touch larger than the dot for the background halo ring. */
+  width: 7.9%;
+  aspect-ratio: 1;
   background: var(--bg);
   border-radius: 50%;
   /* default (pre-JS / touch) matches .radar__dot's default offset */
@@ -231,8 +241,10 @@ onBeforeUnmount(() => {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 32px;
-  height: 32px;
+  /* relative to the radar (≈32px at a 560px radar) so the dot keeps its
+     proportion to the orange core on every screen size */
+  width: 5.7%;
+  aspect-ratio: 1;
   background: var(--ink-900);
   border-radius: 50%;
   transform: translate(-50%, -50%) translate(51px, -51px);
