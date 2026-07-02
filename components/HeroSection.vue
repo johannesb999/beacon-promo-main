@@ -6,6 +6,7 @@ const { t } = useTranslations()
 // toward the cursor's direction and never leaves the circumference.
 const radarEl = ref<HTMLElement | null>(null)
 const dotEl = ref<HTMLElement | null>(null)
+const notchEl = ref<HTMLElement | null>(null)
 
 let currentAngle = -Math.PI / 4 // default: upper-right
 let targetAngle = currentAngle
@@ -20,7 +21,10 @@ function placeDot() {
   const radius = radar.getBoundingClientRect().width * 0.13
   const x = Math.cos(currentAngle) * radius
   const y = Math.sin(currentAngle) * radius
-  dot.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`
+  // the notch tracks the dot 1:1 so the "dent" in the orange core follows it
+  const t = `translate(-50%, -50%) translate(${x}px, ${y}px)`
+  dot.style.transform = t
+  if (notchEl.value) notchEl.value.style.transform = t
 }
 
 function tick() {
@@ -77,6 +81,7 @@ onBeforeUnmount(() => {
       <span class="radar__wave"></span>
       <span class="radar__wave"></span>
       <span class="radar__core"></span>
+      <span ref="notchEl" class="radar__notch"></span>
       <span ref="dotEl" class="radar__dot"></span>
     </div>
 
@@ -203,6 +208,22 @@ onBeforeUnmount(() => {
     opacity: 0;
   }
 }
+/* background-coloured disc that punches the "dent" into the orange core, exactly
+   like the logo (mirrors HowToSection's .howto__notch). JS keeps it locked to the
+   dot so the dent follows the dot along the rim. */
+.radar__notch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px; /* dot is 32px -> ~6px background halo ring, like HowToSection */
+  height: 44px;
+  background: var(--bg);
+  border-radius: 50%;
+  /* default (pre-JS / touch) matches .radar__dot's default offset */
+  transform: translate(-50%, -50%) translate(51px, -51px);
+  z-index: 2; /* between core (1) and dot (3) */
+}
+
 /* the cursor-tracking dot: JS keeps it on the core's rim and eases it along
    the arc, so no CSS transition here (that would lerp straight across the
    interior). Default offset (before JS / on touch) sits on the rim, up-right. */
