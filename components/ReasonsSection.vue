@@ -22,7 +22,7 @@ interface Slide {
 const slides: Slide[] = [
   { type: 'image', src: '/imgs/Map.png', alt: 'Map of your surroundings with reachable Beacons' },
   { type: 'image', src: '/imgs/light dark mock.png', alt: 'Beacon app light and dark mode preview' },
-  { type: 'placeholder' },
+  { type: 'image', src: '/imgs/rings.png', alt: 'Beacon ring wearable concept' },
 ]
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
@@ -86,6 +86,7 @@ onBeforeUnmount(stopTimer)
           v-if="currentSlide.type === 'image'"
           :key="current"
           class="carousel__img"
+          :class="{ 'carousel__img--full-width': current !== 1, 'carousel__img--bleed': current !== 1 }"
           :src="currentSlide.src"
           :alt="currentSlide.alt"
         />
@@ -175,8 +176,11 @@ onBeforeUnmount(stopTimer)
   grid-column: span 2;
   display: grid;
   place-items: center;
+  --carousel-pad-top: clamp(22px, 3vw, 38px);
+  --carousel-pad-x: clamp(64px, 7vw, 96px);
+  --carousel-pad-bottom: clamp(34px, 3.4vw, 50px);
   background: var(--ink-900);
-  padding: clamp(22px, 3vw, 38px) clamp(64px, 7vw, 96px) clamp(34px, 3.4vw, 50px);
+  padding: var(--carousel-pad-top) var(--carousel-pad-x) var(--carousel-pad-bottom);
 }
 .carousel__img {
   display: block;
@@ -184,6 +188,15 @@ onBeforeUnmount(stopTimer)
   height: min(100%, 540px);
   max-width: min(86%, 760px);
   object-fit: contain;
+}
+.carousel__img--full-width {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+.carousel__img--bleed {
+  width: calc(100% + var(--carousel-pad-x) + var(--carousel-pad-x));
+  margin: calc(0px - var(--carousel-pad-top)) calc(0px - var(--carousel-pad-x)) calc(0px - var(--carousel-pad-bottom));
 }
 .carousel__placeholder {
   display: grid;
@@ -217,6 +230,7 @@ onBeforeUnmount(stopTimer)
 }
 .carousel__btn {
   position: absolute;
+  z-index: 1;
   top: 50%;
   transform: translateY(-50%);
   display: grid;
@@ -245,6 +259,7 @@ onBeforeUnmount(stopTimer)
 }
 .carousel__dots {
   position: absolute;
+  z-index: 1;
   left: 50%;
   bottom: clamp(24px, 2.3vw, 36px);
   transform: translateX(-50%);
@@ -315,6 +330,14 @@ onBeforeUnmount(stopTimer)
     width: auto;
     height: min(100%, 430px);
     max-width: min(82%, 520px);
+  }
+  .carousel__img--full-width {
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+  .carousel__img--bleed {
+    width: calc(100% + var(--carousel-pad-x) + var(--carousel-pad-x));
   }
   .reasons__heading {
     line-height: 1.1;
