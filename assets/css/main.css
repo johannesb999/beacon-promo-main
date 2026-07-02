@@ -1,0 +1,97 @@
+/* =========================================================================
+   Beacon promo — global design tokens, base reset & shared utilities.
+   Colour + type tokens mirror the app's design system (src/theme) so the
+   marketing site stays true to the product. Hex values come straight from
+   palette.ts; the vivid violet is website-only (the app has no purple).
+   Component-specific styles live in each component's <style scoped> block.
+   ========================================================================= */
+
+:root {
+  /* Brand */
+  --orange:        #F0531C; /* vivid "beacon" orange (rgb 240 83 28) */
+  --orange-bright: #FF6A33; /* palette.orange400 — glows / highlights   */
+  --orange-deep:   #D43C0D; /* palette.orange500 — pressed / darker     */
+  --violet:        #6C5CE7; /* website-only purple                      */
+  --violet-deep:   #5747C9;
+
+  /* Ink / neutrals (palette.ts) */
+  --ink-900:  #242424;
+  --ink-800:  #2B2B2B;
+  --near-black:#181818;
+  --gray-600: #6B6B6B;
+  --gray-400: #9A9A9A;
+  --gray-300: #C4C8CE;
+  --gray-200: #E2E5EA;
+  --gray-100: #F2F4F6;
+  --road:     #C2C2C2;
+
+  /* Surfaces */
+  --bg:           #F5F4F1; /* warm off-white for light sections */
+  --surface:      #FFFFFF;
+  --dark-bg:      #1B1B1B;
+  --dark-surface: #2B2B2B;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Layout */
+  --maxw: 1180px;
+  --radius: 18px;
+  --pad: 28px;
+  --edge: clamp(16px, 3.5vw, 40px); /* outer gutter so tiles never touch the screen edge */
+  --tilew: 1340px;                  /* shared max width of the centred content tiles */
+
+  --font: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --------------------------------- base --------------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--ink-900);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+ol, ul { list-style: none; }
+
+/* ----------------------------- shared utilities ----------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.accent { color: var(--orange); }
+
+/* Offset anchor jumps so the sticky nav never covers a section heading */
+#reasons, #how, #about { scroll-margin-top: 84px; }
+
+/* Shared section headings */
+.section-title {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.section-title--light { color: var(--white); }
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  :root { --pad: 18px; }
+}

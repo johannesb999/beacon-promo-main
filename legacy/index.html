@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beacon — Help is closer than you think</title>
+  <meta name="description" content="Beacon — a living safety net. Press and hold to call for help; your neighbourhood lights up to guide you home." />
+  <!-- Switzer (the brand typeface) via Fontshare, the font's official free CDN -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="nav">
+    <nav class="nav__inner container">
+      <ul class="nav__links">
+        <li><a href="#top" class="nav__link is-active" data-i18n="nav.home">Home</a></li>
+        <li><a href="#how" class="nav__link" data-i18n="nav.how">How it works</a></li>
+        <li><a href="#about" class="nav__link" data-i18n="nav.about">About Us</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Language">
+        <button class="lang__btn" data-set-lang="de">DE</button>
+        <span class="lang__sep">|</span>
+        <button class="lang__btn is-active" data-set-lang="en">EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============================ HERO ============================ -->
+    <section class="hero container">
+      <div class="hero__copy">
+        <h1 class="hero__title">
+          <span class="hero__title-big" data-i18n="hero.title">Help</span>
+          <span class="hero__title-sub" data-i18n="hero.sub">is closer than you think</span>
+        </h1>
+
+        <div class="hero__cta">
+          <div class="qr" data-qr aria-label="QR code"></div>
+          <div class="store-badges">
+            <a class="badge" href="#">
+              <svg viewBox="0 0 24 24" class="badge__icon" aria-hidden="true"><path d="M4 3.5v17a.7.7 0 0 0 1.06.6l13.9-8.5a.7.7 0 0 0 0-1.2L5.06 2.9A.7.7 0 0 0 4 3.5Z" fill="currentColor"/></svg>
+              <span>Playstore</span>
+            </a>
+            <a class="badge" href="#">
+              <svg viewBox="0 0 24 24" class="badge__icon" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-3 1.7-3a3.7 3.7 0 0 0-2.9-1.6c-1.2-.1-2.4.7-3 .7s-1.6-.7-2.6-.7A3.9 3.9 0 0 0 4.3 9.8c-1.4 2.5-.4 6.2 1 8.2.7 1 1.5 2.1 2.5 2 1-.04 1.4-.65 2.6-.65s1.6.65 2.6.63c1.1-.02 1.8-1 2.5-2a8.7 8.7 0 0 0 1.1-2.3c-.03-.01-2.1-.82-2.1-3.28ZM14.6 6a3.6 3.6 0 0 0 .82-2.6 3.7 3.7 0 0 0-2.4 1.24A3.4 3.4 0 0 0 12.2 7 3 3 0 0 0 14.6 6Z" fill="currentColor"/></svg>
+              <span>Appstore</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <!-- Radar / beacon: concentric rings with the orange beacon pulsing in the centre -->
+        <div class="radar" aria-hidden="true">
+          <svg viewBox="0 0 460 460" class="radar__rings">
+            <circle cx="230" cy="230" r="222" />
+            <circle cx="230" cy="230" r="170" />
+            <circle cx="230" cy="230" r="120" />
+          </svg>
+          <span class="radar__pulse"></span>
+          <span class="radar__core"></span>
+          <span class="radar__dot"></span>
+        </div>
+        <p class="members">
+          <span class="members__line" data-i18n="hero.already">Already</span>
+          <span class="members__num">2.305</span>
+          <span class="members__line" data-i18n="hero.members">members in your area</span>
+        </p>
+      </div>
+
+      <a href="#how" class="hero__howlink" data-i18n="hero.howlink">How it Works</a>
+    </section>
+
+    <!-- ===================== REASONS WHY BEACON ===================== -->
+    <section class="reasons" id="reasons">
+      <div class="reasons__bg" aria-hidden="true">
+        <!-- decorative circuit network -->
+        <svg viewBox="0 0 760 620" class="reasons__circuit" preserveAspectRatio="xMidYMid meet">
+          <path d="M40 90 H300 V250 H470 V150 H720" />
+          <path d="M120 560 H360 V410 H540 V470 H720" />
+          <path d="M300 250 V410" />
+          <path d="M470 150 V40" />
+        </svg>
+        <span class="orb orb--violet orb--a"></span>
+        <span class="orb orb--violet orb--b"></span>
+        <span class="orb orb--violet orb--c"></span>
+        <span class="orb orb--white"></span>
+      </div>
+
+      <div class="container reasons__inner">
+        <div class="reasons__head">
+          <h2 class="section-title section-title--light">
+            <span data-i18n="reasons.title1">Reasons why</span>
+            <span class="accent" data-i18n="reasons.title2">Beacon</span>
+          </h2>
+
+          <!-- ALTERNATIVE DARSTELLUNG: the three reasons as a glowing "safe path" —
+               beacon nodes strung along a route line, echoing the app's map. -->
+          <ol class="path" aria-label="Reasons why Beacon">
+            <li class="path__step">
+              <span class="path__node">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 7v6c0 5 3.8 8.3 9 9 5.2-.7 9-4 9-9V7l-9-5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8.5 12 2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div class="path__text">
+                <span class="path__index">01</span>
+                <h3 class="path__title" data-i18n="reasons.r1">Always a safe path</h3>
+                <p class="path__desc" data-i18n="reasons.r1d">Every hold maps the calmest route to the nearest safe spot.</p>
+              </div>
+            </li>
+
+            <li class="path__step">
+              <span class="path__node">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="9.5" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-2.8 2.2-4.6 5-4.6s5 1.8 5 4.6M14.5 18.4c0-2.2 1.7-3.6 3.9-3.6 1.4 0 2.6.6 3.3 1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </span>
+              <div class="path__text">
+                <span class="path__index">02</span>
+                <h3 class="path__title" data-i18n="reasons.r2">You're never alone</h3>
+                <p class="path__desc" data-i18n="reasons.r2d">Nearby Beacons light up and move toward you in real time.</p>
+              </div>
+            </li>
+
+            <li class="path__step">
+              <span class="path__node">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V7M12 7l-5 5M12 7l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="4" r="1.6" fill="currentColor"/></svg>
+              </span>
+              <div class="path__text">
+                <span class="path__index">03</span>
+                <h3 class="path__title" data-i18n="reasons.r3">Have a clear next step</h3>
+                <p class="path__desc" data-i18n="reasons.r3d">A direction arrow always points you toward what's next.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="reasons__circle">
+          <div class="big-circle">
+            <p data-i18n="reasons.blurb">Beacon turns the people and places around you into a living safety net. One hold of a button quietly calls for help — and your neighbourhood lights up to guide you home.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= HOW TO USE ========================= -->
+    <section class="howto container" id="how">
+      <div class="howto__photo">
+        <img src="imgs/260624_BEACON_Bachelor_Kampagne_Plakat1.png" alt="A person checking the Beacon app on a phone at night" />
+      </div>
+
+      <div class="howto__body">
+        <h2 class="section-title" data-i18n="howto.title">How to Use</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">1.</span>
+            <div>
+              <h3 class="step__title" data-i18n="howto.s1">See your surroundings</h3>
+              <p class="step__desc" data-i18n="howto.s1d">A live map shows your location and the Beacons reachable around you.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">2.</span>
+            <div>
+              <h3 class="step__title" data-i18n="howto.s2">Hold to activate help</h3>
+              <p class="step__desc" data-i18n="howto.s2d">The button arms quietly. A route to the best Spot appears, with alternatives and a direction arrow.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">3.</span>
+            <div>
+              <h3 class="step__title" data-i18n="howto.s3">Beacons light up</h3>
+              <p class="step__desc" data-i18n="howto.s3d">Nearby helpers and Safe Spots are activated and signal that they're on the way.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">4.</span>
+            <div>
+              <h3 class="step__title" data-i18n="howto.s4">You get help</h3>
+              <p class="step__desc" data-i18n="howto.s4d">You recognize your helper by their blinking flashlight; your phones confirm the connection. Stop the alarm at any time with “I feel safe”.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== PHONE MOCKUP ROW ===================== -->
+    <section class="phones container" aria-label="App screens">
+      <!-- Phone 1 — idle, reachable-Beacons counter + hold button -->
+      <figure class="phone-card">
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen map">
+            <span class="map__counter">10</span>
+            <small class="map__counter-label" data-i18n="phone.reachable">reachable</small>
+            <svg class="map__roads" viewBox="0 0 160 320" aria-hidden="true">
+              <path d="M-10 110 H170 M-10 220 H170 M55 -10 V330 M120 -10 V330" stroke="var(--road)" stroke-width="6" fill="none"/>
+            </svg>
+            <span class="pin pin--user" style="left:46%;top:55%"></span>
+            <span class="pin pin--idle" style="left:70%;top:30%"></span>
+            <span class="pin pin--idle" style="left:24%;top:68%"></span>
+            <div class="hold-btn"><span class="hold-btn__chevrons">»</span></div>
+          </div>
+        </div>
+        <figcaption data-i18n="phone.c1">Drag and hold to prepare a Beacon</figcaption>
+      </figure>
+
+      <!-- Phone 2 — route armed -->
+      <figure class="phone-card">
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen map">
+            <span class="map__route-badge">↗ 50m</span>
+            <span class="map__counter map__counter--sm">0</span>
+            <small class="map__counter-label" data-i18n="phone.estimate">estimate</small>
+            <svg class="map__roads" viewBox="0 0 160 320" aria-hidden="true">
+              <path d="M-10 110 H170 M-10 220 H170 M55 -10 V330 M120 -10 V330" stroke="var(--road)" stroke-width="6" fill="none"/>
+              <path class="route" d="M55 250 V150 H120 V70" />
+            </svg>
+            <span class="pin pin--user" style="left:34%;top:78%"></span>
+            <span class="pin pin--active" style="left:75%;top:22%"></span>
+            <div class="hold-btn hold-btn--armed"></div>
+            <span class="side-btn side-btn--l"></span>
+            <span class="side-btn side-btn--r"></span>
+          </div>
+        </div>
+        <figcaption data-i18n="phone.c2">A route to the nearest Spot appears</figcaption>
+      </figure>
+
+      <!-- Phone 3 — helper on the way -->
+      <figure class="phone-card">
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen map map--connected">
+            <span class="map__route-badge">↗ 50m</span>
+            <span class="map__counter map__counter--sm">5</span>
+            <small class="map__counter-label" data-i18n="phone.estimate">estimate</small>
+            <svg class="map__roads" viewBox="0 0 160 320" aria-hidden="true">
+              <path d="M-10 110 H170 M-10 220 H170 M55 -10 V330 M120 -10 V330" stroke="var(--road)" stroke-width="6" fill="none"/>
+              <path class="route" d="M55 250 V150 H120 V70" />
+            </svg>
+            <span class="pin pin--user" style="left:34%;top:78%"></span>
+            <span class="pin pin--active" style="left:75%;top:22%"></span>
+            <span class="pin pin--active" style="left:60%;top:48%"></span>
+            <div class="hold-btn hold-btn--armed"></div>
+            <span class="side-btn side-btn--l"></span>
+            <span class="side-btn side-btn--r"></span>
+          </div>
+        </div>
+        <figcaption data-i18n="phone.c3">Nearby Beacons are on the way</figcaption>
+      </figure>
+
+      <!-- Phone 4 — alarm / "I feel safe" -->
+      <figure class="phone-card">
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__screen map map--alarm">
+            <div class="map__alarm-bar">
+              <span data-i18n="phone.cancel">Cancel the alarm any time</span>
+              <span class="map__alarm-pill" data-i18n="phone.feelsafe">I feel safe</span>
+            </div>
+            <span class="map__route-badge">↗ 50m</span>
+            <span class="map__counter map__counter--sm">5</span>
+            <small class="map__counter-label" data-i18n="phone.estimate">estimate</small>
+            <svg class="map__roads" viewBox="0 0 160 320" aria-hidden="true">
+              <path d="M-10 130 H170 M-10 240 H170 M55 10 V330 M120 10 V330" stroke="var(--road)" stroke-width="6" fill="none"/>
+              <path class="route" d="M55 260 V170 H120 V100" />
+            </svg>
+            <span class="pin pin--user" style="left:34%;top:80%"></span>
+            <span class="pin pin--active" style="left:75%;top:34%"></span>
+            <div class="hold-btn hold-btn--armed"></div>
+            <span class="side-btn side-btn--l"></span>
+            <span class="side-btn side-btn--r"></span>
+          </div>
+        </div>
+        <figcaption data-i18n="phone.c4">Stop any time — “I feel safe”</figcaption>
+      </figure>
+    </section>
+
+    <!-- ===================== JOIN BEACON / HELP ===================== -->
+    <section class="join">
+      <div class="container join__inner">
+        <div class="join__copy">
+          <h2 class="section-title section-title--light" data-i18n="join.title">Join Beacon and help</h2>
+          <p class="join__lead" data-i18n="join.lead">A Beacon is anyone — or anywhere — that lights up when someone nearby needs help. The network only works because real people choose to be part of it.</p>
+
+          <div class="help-card">
+            <div class="help-card__head">
+              <span class="help-card__label">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" fill="currentColor"/></svg>
+                <span data-i18n="join.please">Please help</span>
+              </span>
+              <span class="help-card__radio"></span>
+            </div>
+            <p class="help-card__msg" data-i18n="join.msg">A person in your area might need your help</p>
+            <div class="help-card__actions">
+              <button class="hc-btn hc-btn--ghost" data-i18n="join.notnow">Not now</button>
+              <button class="hc-btn hc-btn--solid" data-i18n="join.iwill">I will help</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="join__photo">
+          <img src="imgs/ChatGPT%20Image%2024.%20Juni%202026%2C%2016_13_42.png" alt="A person responding to a Beacon alert on their phone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ROLE CARDS ======================= -->
+    <section class="roles container">
+      <article class="role-card">
+        <span class="role-card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3 class="role-card__title" data-i18n="roles.person">As a Person</h3>
+        <p class="role-card__text" data-i18n="roles.text">Keep Beacon on at night. When someone close by feels unsafe and you're the best match, you're asked — gently — to help, and guided safely toward them.</p>
+      </article>
+
+      <article class="role-card">
+        <span class="role-card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </span>
+        <h3 class="role-card__title" data-i18n="roles.safespace">As a Safespace</h3>
+        <p class="role-card__text" data-i18n="roles.text">Keep Beacon on at night. When someone close by feels unsafe and you're the best match, you're asked — gently — to help, and guided safely toward them.</p>
+      </article>
+
+      <article class="role-card">
+        <span class="role-card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13 3 11l3-7 4 1.5M16 13l5-2-3-7-4 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 5.5h4v7a2 2 0 0 1-4 0Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 19h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <h3 class="role-card__title" data-i18n="roles.partner">As a Partner</h3>
+        <p class="role-card__text" data-i18n="roles.text">Keep Beacon on at night. When someone close by feels unsafe and you're the best match, you're asked — gently — to help, and guided safely toward them.</p>
+      </article>
+    </section>
+
+    <!-- ===================== JOIN BEACON TODAY ===================== -->
+    <section class="today">
+      <div class="container today__inner">
+        <h2 class="today__title">
+          <span data-i18n="today.l1">Join Beacon</span>
+          <span data-i18n="today.l2">Today</span>
+        </h2>
+        <div class="today__cta">
+          <div class="qr qr--light" data-qr aria-label="QR code"></div>
+          <div class="store-badges">
+            <a class="badge badge--light" href="#">
+              <svg viewBox="0 0 24 24" class="badge__icon" aria-hidden="true"><path d="M4 3.5v17a.7.7 0 0 0 1.06.6l13.9-8.5a.7.7 0 0 0 0-1.2L5.06 2.9A.7.7 0 0 0 4 3.5Z" fill="currentColor"/></svg>
+              <span>Playstore</span>
+            </a>
+            <a class="badge badge--light" href="#">
+              <svg viewBox="0 0 24 24" class="badge__icon" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-3 1.7-3a3.7 3.7 0 0 0-2.9-1.6c-1.2-.1-2.4.7-3 .7s-1.6-.7-2.6-.7A3.9 3.9 0 0 0 4.3 9.8c-1.4 2.5-.4 6.2 1 8.2.7 1 1.5 2.1 2.5 2 1-.04 1.4-.65 2.6-.65s1.6.65 2.6.63c1.1-.02 1.8-1 2.5-2a8.7 8.7 0 0 0 1.1-2.3c-.03-.01-2.1-.82-2.1-3.28ZM14.6 6a3.6 3.6 0 0 0 .82-2.6 3.7 3.7 0 0 0-2.4 1.24A3.4 3.4 0 0 0 12.2 7 3 3 0 0 0 14.6 6Z" fill="currentColor"/></svg>
+              <span>Appstore</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= ABOUT US ========================= -->
+    <section class="about container" id="about">
+      <div class="about__copy">
+        <h2 class="section-title" data-i18n="about.title">About US</h2>
+        <p class="about__text" data-i18n="about.text">Dieses Projekt entstand als Bachelorarbeit der Studiengänge Internet of Things und ist (evtl. noch) nicht für den Realen gebrauch gedacht.</p>
+      </div>
+      <a class="bachelor-btn" href="#">
+        <span data-i18n="about.btn">Bachelor Project</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <footer class="legal">
+    <a href="#" data-i18n="legal">LEGAL NOTICE</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

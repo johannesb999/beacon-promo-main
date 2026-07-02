@@ -1,0 +1,13 @@
+.git
+.github
+.claude
+.nuxt
+.output
+node_modules
+legacy
+*.log
+.nuxt-dev.*.log
+.env
+.env.*
+Dockerfile
+README.md
