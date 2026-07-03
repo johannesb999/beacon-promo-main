@@ -32,4 +32,10 @@ withDefaults(defineProps<{ light?: boolean; size?: 'default' | 'large' }>(), {
 .qr--light img {
   filter: brightness(0) invert(1);
 }
+
+@media (max-width: 900px) {
+  .qr {
+    display: none;
+  }
+}
 </style>

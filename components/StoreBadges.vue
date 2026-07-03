@@ -13,10 +13,10 @@ withDefaults(defineProps<{ light?: boolean; horizontal?: boolean }>(), { light: 
       <img :src="playstoreIcon" class="badge__icon" alt="" aria-hidden="true" />
       <span>Playstore</span>
     </a>
-    <a class="badge" :class="{ 'badge--light': light }" :href="storeLink">
+    <span class="badge badge--disabled" :class="{ 'badge--light': light }" aria-disabled="true">
       <img :src="appstoreIcon" class="badge__icon" alt="" aria-hidden="true" />
       <span>Appstore</span>
-    </a>
+    </span>
   </div>
 </template>
 
@@ -44,9 +44,13 @@ withDefaults(defineProps<{ light?: boolean; horizontal?: boolean }>(), { light: 
   width: max-content;
   transition: transform 0.18s ease, background 0.18s ease;
 }
-.badge:hover {
+.badge:not(.badge--disabled):hover {
   transform: translateY(-2px);
   background: #000;
+}
+.badge--disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 .badge__icon {
   width: 16px;
@@ -61,7 +65,14 @@ withDefaults(defineProps<{ light?: boolean; horizontal?: boolean }>(), { light: 
   background: var(--white);
   color: var(--ink-900);
 }
-.badge--light:hover {
+.badge--light:not(.badge--disabled):hover {
   background: var(--gray-100);
+}
+
+@media (max-width: 900px) {
+  .store-badges--horizontal {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
