@@ -43,7 +43,11 @@ const authors = [
       </ul>
     </div>
 
-    <a class="bachelor-btn" href="#">
+    <a
+      class="bachelor-btn"
+      href="/docs/DP-KG_Beacon_Biess_Flaig_Kling_SS26_Abgabe.pdf"
+      download="Beacon-documentation.pdf"
+    >
       <span>{{ t('about.btn') }}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
