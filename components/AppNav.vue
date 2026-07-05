@@ -4,11 +4,11 @@ const { t, locale, setLang } = useTranslations()
 
 <template>
   <header class="nav">
-    <nav class="nav__inner container">
+    <nav class="nav__inner">
       <ul class="nav__links">
-        <li><a href="#top" class="nav__link is-active">{{ t('nav.home') }}</a></li>
-        <li><a href="#how" class="nav__link">{{ t('nav.how') }}</a></li>
-        <li><a href="#about" class="nav__link">{{ t('nav.about') }}</a></li>
+        <li><NuxtLink to="/#top" class="nav__link is-active">{{ t('nav.home') }}</NuxtLink></li>
+        <li><NuxtLink to="/#how" class="nav__link">{{ t('nav.how') }}</NuxtLink></li>
+        <li><NuxtLink to="/#about" class="nav__link">{{ t('nav.about') }}</NuxtLink></li>
       </ul>
       <div class="lang" role="group" aria-label="Language">
         <button
@@ -37,11 +37,17 @@ const { t, locale, setLang } = useTranslations()
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
+/* Same width + gutter as the content tiles (hero, sections) so the links sit
+   flush left and the language switch flush right with the rest of the page. */
 .nav__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 66px;
+  width: 100%;
+  max-width: var(--tilew);
+  margin-inline: auto;
+  padding-inline: var(--edge);
 }
 .nav__links {
   display: flex;

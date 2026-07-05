@@ -6,7 +6,7 @@ const { t } = useTranslations()
 // toward the cursor's direction and never leaves the circumference.
 const radarEl = ref<HTMLElement | null>(null)
 const dotEl = ref<HTMLElement | null>(null)
-const notchEl = ref<HTMLElement | null>(null)
+const coreEl = ref<HTMLElement | null>(null)
 
 let currentAngle = -Math.PI / 4 // default: upper-right
 let targetAngle = currentAngle
@@ -18,13 +18,20 @@ function placeDot() {
   const radar = radarEl.value
   const dot = dotEl.value
   if (!radar || !dot) return
-  const radius = radar.getBoundingClientRect().width * 0.13
+  const w = radar.getBoundingClientRect().width
+  const radius = w * 0.13
   const x = Math.cos(currentAngle) * radius
   const y = Math.sin(currentAngle) * radius
-  // the notch tracks the dot 1:1 so the "dent" in the orange core follows it
-  const t = `translate(-50%, -50%) translate(${x}px, ${y}px)`
-  dot.style.transform = t
-  if (notchEl.value) notchEl.value.style.transform = t
+  dot.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`
+  // the dent is a real hole punched into the core (mask), tracking the dot 1:1.
+  // Mask coords are core-local: the core's centre sits at (radius, radius).
+  const core = coreEl.value
+  if (core) {
+    const r = w * 0.0395 // dent radius, ≈22px at a 560px radar
+    const m = `radial-gradient(circle at ${radius + x}px ${radius + y}px, transparent ${r - 0.5}px, #000 ${r + 0.5}px)`
+    core.style.mask = m
+    core.style.webkitMask = m
+  }
 }
 
 function tick() {
@@ -87,8 +94,9 @@ onBeforeUnmount(() => {
       <span class="radar__wave"></span>
       <span class="radar__wave"></span>
       <span class="radar__wave"></span>
-      <span class="radar__core"></span>
-      <span ref="notchEl" class="radar__notch"></span>
+      <span class="radar__core-glow">
+        <span ref="coreEl" class="radar__core"></span>
+      </span>
       <span ref="dotEl" class="radar__dot"></span>
     </div>
 
@@ -175,14 +183,28 @@ onBeforeUnmount(() => {
   place-items: center;
   z-index: 1;
 }
-.radar__core {
+/* Glow lives on a wrapper as drop-shadow so it follows the core's MASKED
+   silhouette — it also bleeds softly into the dent, which therefore gets the
+   same warm tint as the background around the disc (a flat --bg notch used
+   to read as a stark white ring against the glow). */
+.radar__core-glow {
   position: absolute;
   width: 26%;
   aspect-ratio: 1;
+  filter: drop-shadow(0 8px 22px rgba(240, 83, 28, 0.45));
+  z-index: 1;
+}
+.radar__core {
+  display: block;
+  width: 100%;
+  height: 100%;
   background: var(--orange);
   border-radius: 50%;
-  box-shadow: 0 8px 30px rgba(240, 83, 28, 0.45);
-  z-index: 1;
+  /* the dent: a real transparent hole punched out of the disc, exactly like
+     the logo. Default (pre-JS / touch) matches .radar__dot's default offset;
+     placeDot() re-renders it in px for the actual radar size. */
+  mask: radial-gradient(circle at calc(50% + 51px) calc(50% - 51px), transparent 21.5px, #000 22.5px);
+  -webkit-mask: radial-gradient(circle at calc(50% + 51px) calc(50% - 51px), transparent 21.5px, #000 22.5px);
 }
 /* expanding rings — every visible line is one of these waves growing out
    from the core and fading the further it travels. */
@@ -214,24 +236,6 @@ onBeforeUnmount(() => {
     width: var(--max, 100%);
     opacity: 0;
   }
-}
-/* background-coloured disc that punches the "dent" into the orange core, exactly
-   like the logo (mirrors HowToSection's .howto__notch). JS keeps it locked to the
-   dot so the dent follows the dot along the rim. */
-.radar__notch {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* sized relative to the radar (like the core/waves) so it scales down on
-     mobile — ~7.9% keeps the desktop look (≈44px at a 560px radar) while
-     staying a touch larger than the dot for the background halo ring. */
-  width: 7.9%;
-  aspect-ratio: 1;
-  background: var(--bg);
-  border-radius: 50%;
-  /* default (pre-JS / touch) matches .radar__dot's default offset */
-  transform: translate(-50%, -50%) translate(51px, -51px);
-  z-index: 2; /* between core (1) and dot (3) */
 }
 
 /* the cursor-tracking dot: JS keeps it on the core's rim and eases it along

@@ -75,6 +75,7 @@ const I18N: Record<Locale, Record<string, string>> = {
     'about.btn': 'Bachelor Project',
 
     'legal': 'LEGAL NOTICE',
+    'privacy': 'PRIVACY POLICY',
   },
 
   de: {
@@ -146,6 +147,7 @@ const I18N: Record<Locale, Record<string, string>> = {
     'about.btn': 'Bachelor Project',
 
     'legal': 'IMPRESSUM',
+    'privacy': 'DATENSCHUTZ',
   },
 }
 
